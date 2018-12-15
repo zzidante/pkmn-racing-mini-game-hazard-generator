@@ -496,6 +496,14 @@
           text-align:center;
           color:black;
       }
+
+      /* CUSTOM */
+
+      p {
+        font-size: 1.2rem;
+        width: 80vw;
+        word-wrap: wrap;
+      }
     </style>
 </head>
 <body>
@@ -566,12 +574,12 @@
 
                 this.hazard = {
                   mountain: {
-                    '1': 'm1',
-                    '2': 'm2',
-                    '3': 'm3',
-                    '4': 'm4',
-                    '5': 'm5',
-                    '6': 'm6',
+                    '1': `${terrain.toUpperCase()}: Magnemite has caused intense static. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage. Rock is immune. Electric Types gain advantage.`,
+                    '2': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
+                    '3': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
+                    '4': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
+                    '5': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
+                    '6': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
                   },
                   desert: {
                     '1': 'm1',
