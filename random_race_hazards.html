@@ -472,23 +472,83 @@
       .gray:active:before { background-color: #46444c; }
       .gray:active:after { border-color: #46444c; }
       .gray:hover { color: #605f60; }
+
+      /* CIRCLES https://codeitdown.com/css-circles/*/
+      .circle-text { width:100%; }
+      .circle-size { min-width: 5rem; max-width: 10rem; min-height: 5rem; max-height: 10rem; }
+      .circle-text:after {
+          content: "";
+          display: block;
+          width: 100%;
+          height:0;
+          padding-bottom: 100%;
+          background: white; 
+          -moz-border-radius: 50%; 
+          -webkit-border-radius: 50%; 
+          border-radius: 50%;
+      }
+      .circle-text div {
+          float:left;
+          width:100%;
+          padding-top:50%;
+          line-height:1em;
+          margin-top: -0.3rem;
+          text-align:center;
+          color:black;
+      }
     </style>
 </head>
 <body>
 
     <div id="app">
-      <div class="container heading">
-        <h2>Click A Terrain To Generate a Hazard</h2>
+      <div class="container">
+        <h2 class ="heading">Click A Terrain To Generate a Hazard</h2>
       </div>
       <div class="container">
-        <div class="flex" v-on:click="expressHazard('mountain')"><a class ="bttn red">Mountain</a></div>
-        <div class="flex" v-on:click="expressHazard('desert')"><a class ="bttn yellow">Desert</a></div>
         <div class="flex" v-on:click="expressHazard('forest')"><a class ="bttn green">Forest</a></div>
-        <div class="flex" v-on:click="expressHazard('marsh')"><a class ="bttn algae">Marsh</a></div>
+        <div class="flex" v-on:click="expressHazard('desert')"><a class ="bttn yellow">Desert</a></div>
+        <div class="flex" v-on:click="expressHazard('mountain')"><a class ="bttn red">Mountain</a></div>
         <div class="flex" v-on:click="expressHazard('cave')"><a class ="bttn gray">Cave</a></div>
+        <div class="flex" v-on:click="expressHazard('marsh')"><a class ="bttn algae">Marsh</a></div>
       </div>
       <div class="container description">
         <p>{{ hazard }}</p>
+      </div>
+
+      <div class="container">
+        <h2 class="heading">Type Advantages By Terrain</h2>  
+      </div>
+
+      <div class="container">
+        <div class="circle-size"><div class="circle-text yellow"><div>Normal</div></div></div>
+        <div class="circle-size"><div class="circle-text red"><div>Electric</div></div></div>
+        <div class="circle-size"><div class="circle-text gray"><div>Dark</div></div></div>
+       
+      </div>
+
+      <div class="container">
+        <div class="circle-size"><div class="circle-text green"><div>Poison</div></div></div>
+        <div class="circle-size"><div class="circle-text yellow"><div>Fire</div></div></div>
+        <div class="circle-size"><div class="circle-text red"><div>Flying</div></div></div>
+        <div class="circle-size"><div class="circle-text gray"><div>Rock</div></div></div>
+        <div class="circle-size"><div class="circle-text algae"><div>Psychic</div></div></div>
+       
+      </div>
+
+      <div class="container">
+        <div class="circle-size"><div class="circle-text green"><div>Bug</div></div></div>
+        <div class="circle-size"><div class="circle-text yellow"><div>Steel</div></div></div>
+        <div class="circle-size"><div class="circle-text red"><div>Fighting</div></div></div>
+        <div class="circle-size"><div class="circle-text gray"><div>Dragon</div></div></div>
+        <div class="circle-size"><div class="circle-text algae"><div>Fairy</div></div></div>
+      </div>
+      
+      <div class="container">
+        <div class="circle-size"><div class="circle-text green"><div>Grass</div></div></div>
+        <div class="circle-size"><div class="circle-text yellow"><div>Ground</div></div></div>
+        <div class="circle-size"><div class="circle-text red"><div>Ice</div></div></div>
+        <div class="circle-size"><div class="circle-text gray"><div>Ghost</div></div></div>
+        <div class="circle-size"><div class="circle-text algae"><div>Water</div></div></div>
       </div>
     </div>
     
