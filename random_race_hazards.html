@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Random Race Hazards</title>
+    <style type="text/css" media="screen">
+    /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+      /* Document
+        ========================================================================== */
+
+      /**
+      * 1. Correct the line height in all browsers.
+      * 2. Prevent adjustments of font size after orientation changes in iOS.
+      */
+
+      html {
+        line-height: 1.15; /* 1 */
+        -webkit-text-size-adjust: 100%; /* 2 */
+      }
+
+      /* Sections
+        ========================================================================== */
+
+      /**
+      * Remove the margin in all browsers.
+      */
+
+      body {
+        margin: 0;
+      }
+
+      /**
+      * Render the `main` element consistently in IE.
+      */
+
+      main {
+        display: block;
+      }
+
+      /**
+      * Correct the font size and margin on `h1` elements within `section` and
+      * `article` contexts in Chrome, Firefox, and Safari.
+      */
+
+      h1 {
+        font-size: 2em;
+        margin: 0.67em 0;
+      }
+
+      /* Grouping content
+        ========================================================================== */
+
+      /**
+      * 1. Add the correct box sizing in Firefox.
+      * 2. Show the overflow in Edge and IE.
+      */
+
+      hr {
+        box-sizing: content-box; /* 1 */
+        height: 0; /* 1 */
+        overflow: visible; /* 2 */
+      }
+
+      /**
+      * 1. Correct the inheritance and scaling of font size in all browsers.
+      * 2. Correct the odd `em` font sizing in all browsers.
+      */
+
+      pre {
+        font-family: monospace, monospace; /* 1 */
+        font-size: 1em; /* 2 */
+      }
+
+      /* Text-level semantics
+        ========================================================================== */
+
+      /**
+      * Remove the gray background on active links in IE 10.
+      */
+
+      a {
+        background-color: transparent;
+      }
+
+      /**
+      * 1. Remove the bottom border in Chrome 57-
+      * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+      */
+
+      abbr[title] {
+        border-bottom: none; /* 1 */
+        text-decoration: underline; /* 2 */
+        text-decoration: underline dotted; /* 2 */
+      }
+
+      /**
+      * Add the correct font weight in Chrome, Edge, and Safari.
+      */
+
+      b,
+      strong {
+        font-weight: bolder;
+      }
+
+      /**
+      * 1. Correct the inheritance and scaling of font size in all browsers.
+      * 2. Correct the odd `em` font sizing in all browsers.
+      */
+
+      code,
+      kbd,
+      samp {
+        font-family: monospace, monospace; /* 1 */
+        font-size: 1em; /* 2 */
+      }
+
+      /**
+      * Add the correct font size in all browsers.
+      */
+
+      small {
+        font-size: 80%;
+      }
+
+      /**
+      * Prevent `sub` and `sup` elements from affecting the line height in
+      * all browsers.
+      */
+
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+      }
+
+      sub {
+        bottom: -0.25em;
+      }
+
+      sup {
+        top: -0.5em;
+      }
+
+      /* Embedded content
+        ========================================================================== */
+
+      /**
+      * Remove the border on images inside links in IE 10.
+      */
+
+      img {
+        border-style: none;
+      }
+
+      /* Forms
+        ========================================================================== */
+
+      /**
+      * 1. Change the font styles in all browsers.
+      * 2. Remove the margin in Firefox and Safari.
+      */
+
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        font-family: inherit; /* 1 */
+        font-size: 100%; /* 1 */
+        line-height: 1.15; /* 1 */
+        margin: 0; /* 2 */
+      }
+
+      /**
+      * Show the overflow in IE.
+      * 1. Show the overflow in Edge.
+      */
+
+      button,
+      input { /* 1 */
+        overflow: visible;
+      }
+
+      /**
+      * Remove the inheritance of text transform in Edge, Firefox, and IE.
+      * 1. Remove the inheritance of text transform in Firefox.
+      */
+
+      button,
+      select { /* 1 */
+        text-transform: none;
+      }
+
+      /**
+      * Correct the inability to style clickable types in iOS and Safari.
+      */
+
+      button,
+      [type="button"],
+      [type="reset"],
+      [type="submit"] {
+        -webkit-appearance: button;
+      }
+
+      /**
+      * Remove the inner border and padding in Firefox.
+      */
+
+      button::-moz-focus-inner,
+      [type="button"]::-moz-focus-inner,
+      [type="reset"]::-moz-focus-inner,
+      [type="submit"]::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+      }
+
+      /**
+      * Restore the focus styles unset by the previous rule.
+      */
+
+      button:-moz-focusring,
+      [type="button"]:-moz-focusring,
+      [type="reset"]:-moz-focusring,
+      [type="submit"]:-moz-focusring {
+        outline: 1px dotted ButtonText;
+      }
+
+      /**
+      * Correct the padding in Firefox.
+      */
+
+      fieldset {
+        padding: 0.35em 0.75em 0.625em;
+      }
+
+      /**
+      * 1. Correct the text wrapping in Edge and IE.
+      * 2. Correct the color inheritance from `fieldset` elements in IE.
+      * 3. Remove the padding so developers are not caught out when they zero out
+      *    `fieldset` elements in all browsers.
+      */
+
+      legend {
+        box-sizing: border-box; /* 1 */
+        color: inherit; /* 2 */
+        display: table; /* 1 */
+        max-width: 100%; /* 1 */
+        padding: 0; /* 3 */
+        white-space: normal; /* 1 */
+      }
+
+      /**
+      * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+      */
+
+      progress {
+        vertical-align: baseline;
+      }
+
+      /**
+      * Remove the default vertical scrollbar in IE 10+.
+      */
+
+      textarea {
+        overflow: auto;
+      }
+
+      /**
+      * 1. Add the correct box sizing in IE 10.
+      * 2. Remove the padding in IE 10.
+      */
+
+      [type="checkbox"],
+      [type="radio"] {
+        box-sizing: border-box; /* 1 */
+        padding: 0; /* 2 */
+      }
+
+      /**
+      * Correct the cursor style of increment and decrement buttons in Chrome.
+      */
+
+      [type="number"]::-webkit-inner-spin-button,
+      [type="number"]::-webkit-outer-spin-button {
+        height: auto;
+      }
+
+      /**
+      * 1. Correct the odd appearance in Chrome and Safari.
+      * 2. Correct the outline style in Safari.
+      */
+
+      [type="search"] {
+        -webkit-appearance: textfield; /* 1 */
+        outline-offset: -2px; /* 2 */
+      }
+
+      /**
+      * Remove the inner padding in Chrome and Safari on macOS.
+      */
+
+      [type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+      }
+
+      /**
+      * 1. Correct the inability to style clickable types in iOS and Safari.
+      * 2. Change font properties to `inherit` in Safari.
+      */
+
+      ::-webkit-file-upload-button {
+        -webkit-appearance: button; /* 1 */
+        font: inherit; /* 2 */
+      }
+
+      /* Interactive
+        ========================================================================== */
+
+      /*
+      * Add the correct display in Edge, IE 10+, and Firefox.
+      */
+
+      details {
+        display: block;
+      }
+
+      /*
+      * Add the correct display in all browsers.
+      */
+
+      summary {
+        display: list-item;
+      }
+
+      /* Misc
+        ========================================================================== */
+
+      /**
+      * Add the correct display in IE 10+.
+      */
+
+      template {
+        display: none;
+      }
+
+      /**
+      * Add the correct display in IE 10.
+      */
+
+      [hidden] {
+        display: none;
+      }
+
+ /* https://codepen.io/wintr/pen/beBJBb/ */
+      @import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:700";
+      *,
+      *::before,
+      *::after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+
+      a {
+        color: #333;
+        text-decoration: none;
+        transition: 0.3s all ease;
+      }
+      
+      a:focus {
+        text-decoration: none;
+      }
+      a:active {
+        color: #fff;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Source Sans Pro", sans-serif;
+        background: #f4f5ee;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      .heading {
+        font-size: 2.3rem;
+        margin: 20px 0;
+      }
+
+      .description {
+        margin-top: 2rem;
+        font-size: 2rem;
+      }
+
+      .flex {
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+      }
+      .bttn {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: bold;
+        position: relative;
+      }
+      .bttn:after {
+        transition: 0.3s all ease;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 3px;
+      }
+      .bttn:before {
+        content: "";
+        position: absolute;
+        border-radius: 3px;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        background: #fff;
+        z-index: -1;
+      }
+      .bttn:hover:after {
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+      .bttn:active {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+      .red:after{ border: 3px solid #b15947; }
+      .red:active:before { background-color: #f1481b; }
+      .red:active:after { border-color: #f1481b; }
+      .red:hover { color: #b15947; }
+
+      .yellow:after{ border: 3px solid #ceb431; }
+      .yellow:active:before { background-color: #d3b000; }
+      .yellow:active:after { border-color: #d3b000; }
+      .yellow:hover { color: #ceb431; }
+
+      .green:after{ border: 3px solid #48c13f; }
+      .green:active:before { background-color: #1dc411; }
+      .green:active:after { border-color: #1dc411; }
+      .green:hover { color: #48c13f; }
+
+      .algae:after{ border: 3px solid #3c9685; }
+      .algae:active:before { background-color: #119b82; }
+      .algae:active:after { border-color: #119b82; }
+      .algae:hover { color: #3c9685; }
+
+      .gray:after{ border: 3px solid #605f60; }
+      .gray:active:before { background-color: #46444c; }
+      .gray:active:after { border-color: #46444c; }
+      .gray:hover { color: #605f60; }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+      <div class="container heading">
+        <h2>Click A Terrain To Generate a Hazard</h2>
+      </div>
+      <div class="container">
+        <div class="flex" v-on:click="expressHazard('mountain')"><a class ="bttn red">Mountain</a></div>
+        <div class="flex" v-on:click="expressHazard('desert')"><a class ="bttn yellow">Desert</a></div>
+        <div class="flex" v-on:click="expressHazard('forest')"><a class ="bttn green">Forest</a></div>
+        <div class="flex" v-on:click="expressHazard('marsh')"><a class ="bttn algae">Marsh</a></div>
+        <div class="flex" v-on:click="expressHazard('cave')"><a class ="bttn gray">Cave</a></div>
+      </div>
+      <div class="container description">
+        <p>{{ hazard }}</p>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                hazard: '',
+                
+            },
+            methods: {
+              expressHazard: function (terrain) {
+                const randomNumberUpToSix = (Math.floor(Math.random() * 6) + 1).toString();
+
+                this.hazard = {
+                  mountain: {
+                    '1': 'm1',
+                    '2': 'm2',
+                    '3': 'm3',
+                    '4': 'm4',
+                    '5': 'm5',
+                    '6': 'm6',
+                  },
+                  desert: {
+                    '1': 'm1',
+                    '2': 'm2',
+                    '3': 'm3',
+                    '4': 'm4',
+                    '5': 'm5',
+                    '6': 'm6',
+                  },
+                  marsh: {
+                    '1': 'm1',
+                    '2': 'm2',
+                    '3': 'm3',
+                    '4': 'm4',
+                    '5': 'm5',
+                    '6': 'm6',
+                  },
+                  forest: {
+                    '1': 'm1',
+                    '2': 'm2',
+                    '3': 'm3',
+                    '4': 'm4',
+                    '5': 'm5',
+                    '6': 'm6',
+                  },
+                  cave: {
+                    '1': 'm1',
+                    '2': 'm2',
+                    '3': 'm3',
+                    '4': 'm4',
+                    '5': 'm5',
+                    '6': 'm6',
+                  },
+                }[terrain][randomNumberUpToSix]
+              }
+            }
+        })
+        
+    </script>
+</body>
+</html>
