@@ -513,11 +513,11 @@
         <h2 class ="heading">Click A Terrain To Generate a Hazard</h2>
       </div>
       <div class="container">
-        <div class="flex" v-on:click="expressHazard('forest')"><a class ="bttn green">Forest</a></div>
-        <div class="flex" v-on:click="expressHazard('desert')"><a class ="bttn yellow">Desert</a></div>
-        <div class="flex" v-on:click="expressHazard('mountain')"><a class ="bttn red">Mountain</a></div>
-        <div class="flex" v-on:click="expressHazard('cave')"><a class ="bttn gray">Cave</a></div>
-        <div class="flex" v-on:click="expressHazard('marsh')"><a class ="bttn algae">Marsh</a></div>
+        <div class="flex" v-on:click="expressHazard({ terrain: 'forest' })"><a class ="bttn green">Forest</a></div>
+        <div class="flex" v-on:click="expressHazard({ terrain: 'desert' })"><a class ="bttn yellow">Desert</a></div>
+        <div class="flex" v-on:click="expressHazard({ terrain: 'mountain' })"><a class ="bttn red">Mountain</a></div>
+        <div class="flex" v-on:click="expressHazard({ terrain: 'cave' })"><a class ="bttn gray">Cave</a></div>
+        <div class="flex" v-on:click="expressHazard({ terrain: 'marsh' })"><a class ="bttn algae">Marsh</a></div>
       </div>
       <div class="container description">
         <p>{{ hazard }}</p>
@@ -566,55 +566,70 @@
             el: '#app',
             data: {
                 hazard: '',
-                
+                fileContents: '',
             },
             methods: {
-              expressHazard: function (terrain) {
+              expressHazard: function ({terrain, difficultyLevel = 1, randomDeviationRangeFromZero = 3}) {
+                const titledTerrain = terrain.toUpperCase()
+                const preventNegatives = (num) => { return Math.abs(num) }
+                const randomDCChallenge = ({minDeviation, maxDeviation}) => { return Math.floor(Math.random() * (maxDeviation - minDeviation + 1)) + minDeviation };
+
+                // This determines the ranges of randomness
                 const randomNumberUpToSix = (Math.floor(Math.random() * 6) + 1).toString();
+                const minDeviation = -1 * preventNegatives(randomDeviationRangeFromZero);
+                const maxDeviation = preventNegatives(randomDeviationRangeFromZero);
+
+                // This determined the base difficulty of a challenge before randomness is applied
+                const firstDegreeMean = 10 * difficultyLevel + randomDCChallenge({ minDeviation, maxDeviation} );
+                const secondDegreeMean = 11 * difficultyLevel + randomDCChallenge({ minDeviation, maxDeviation} );
+                const thirdDegreeMean = 12 * difficultyLevel + randomDCChallenge({ minDeviation, maxDeviation} );
+                const fourthDegreeMean = 13 * difficultyLevel + randomDCChallenge({ minDeviation, maxDeviation} );
+                const fifthDegreeMean = 14 * difficultyLevel + randomDCChallenge({ minDeviation, maxDeviation} );
+                const sixthDegreeMean = 15 * difficultyLevel + randomDCChallenge({ minDeviation, maxDeviation} );
 
                 this.hazard = {
                   mountain: {
-                    '1': `${terrain.toUpperCase()}: Magnemite has caused intense static. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage. Rock is immune. Electric Types gain advantage.`,
-                    '2': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
-                    '3': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
-                    '4': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
-                    '5': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
-                    '6': `${terrain.toUpperCase()}: Magnemite has caused intense static. Rock is immune. Make a DC12 Cartography check to find the area with the best cover or else take disadvantage.`,
+                    '1': `${titledTerrain}: Magnemite has caused intense static. Make a DC${thirdDegreeMean} Cartography check to find the area with the best cover or else gain +1 Disadvantage your next turn. Rock is immune. Electric Types gain advantage your next turn if they know an electric move.`,
+                    '2': `${titledTerrain}: A group of Hikers have blocked the path. Make a DC${fourthDegreeMean} Diplomacy or Charm check to pass them or else gain +1 Disadvantage your next turn.`,
+                    '3': `${titledTerrain}: The ground you've stepped on is a herd of Geodude! Flying types must make a DC${thirdDegreeMean} Focus check. Make a DC${fifthDegreeMean} Might, Agility or Intimidation roll, if you ride a Golem you gain advantage upon success. If you lose gain disadvantage.`,
+                    '4': `${titledTerrain}: It is very cold - the ground is slick with ice! Ice types gain advantage upon a DC${firstDegreeMean} Pokedexter or Focus roll. Grass types automatically take disadvantage. Pokemon must make a DC${fifthDegreeMean} special defence challenge or else gain disadvantage. Pokemon knowing ice moves get +5.`,
+                    '5': `${titledTerrain}: The ground shifts violently to one-side! And then another! There must be Onyx travelling beneath your feet! Make a DC${thirdDegreeMean} check to stay on your feet! Fighting-type pokemon gain +5. Flying types are immune`,
+                    '6': `${titledTerrain}: Mist is rolling in and blocking your vision! Ice-types knowing Blizzard, Hail or Icy Wind can use it with a DC${firstDegreeMean} check in order to give disadvantage to any player on a Mountain, Forest or Marsh adjacent. Electric-types can make a DC${firstDegreeMean} Stealth check to use an electric attack move to stun any adjacent player and prevent movement next turn (player can still take an action). Unsuccessful Stealth checks incur a penalty. All types except Ice or Electric need to make a DC${sixthDegreeMean} Special Defence challenge or else lose their action next turn (they may still move).`,
                   },
                   desert: {
-                    '1': 'm1',
-                    '2': 'm2',
-                    '3': 'm3',
-                    '4': 'm4',
-                    '5': 'm5',
-                    '6': 'm6',
+                    '1': `${titledTerrain}: It's getting hard to breath - the sand around you is kicking up violently. You see two smallish round shadows ahead of you. Make a DC${fourthDegreeMean} Pokedexter roll use your ride pokemon's Attack to challenge a DC${firstDegreeMean} Defence, twice. If you fail you lose your action next turn.`,
+                    '2': `${titledTerrain}: The sun is beating down on you. Your ride is getting exhausted. Make a DC${fourthDegreeMean} First Aid check to attend to your ride. Steel, Fire and Ground are immune.`,
+                    '3': `${titledTerrain}: You've stumbled into a nest of Marowak! Bones are flying e'vrywhere! Make a DC${fourthDegreeMean} Performance check to impress the Marowak in a bone dance.`,
+                    '4': `${titledTerrain}: It starts raining large thunderous drops. Fire types take -5 to their rolls next turn. Make a DC${firstDegreeMean} Agility check in order to gain higher ground. If you fail go back one space. Water types which can float just gain disadvantage upon failure.`,
+                    '5': `${titledTerrain}: A giant tumbleweed is barreling towards you. Fire attacks can burst it in flames and give disadvantage to any players adjacent. Steel and Ground are immune. Make a DC${sixthDegreeMean} Agility or Might Check or else gain disadvantage.`,
+                    '6': `${titledTerrain}: You come upon a plain full of Cacturne. Steel and Rock types are immune to the disadvantage but the Player takes a -5 to perspective. Make a DC${secondDegreeMean} to Focus or Agility else take disadvantage.`,
                   },
                   marsh: {
-                    '1': 'm1',
-                    '2': 'm2',
-                    '3': 'm3',
-                    '4': 'm4',
-                    '5': 'm5',
-                    '6': 'm6',
+                    '1': `${titledTerrain}: Vines grabs at your ride's feet! Check your special attack against the a DC${thirdDegreeMean} special defence. If you fail, gain disadvantage. If your ride has a Status effecting move - your pokemon automatically overcomes the vines. They were bulbasaur!`,
+                    '2': `${titledTerrain}: Lights are flickering around you - spooking your pokemon! Psychic types are immune. Make a DC${fourthDegreeMean} Focus check else gain disadvantage`,
+                    '3': `${titledTerrain}: You take a step and suddenly lurch forward - your pokemon's front legs are sticking in the mud! Make a DC${fourthDegreeMean} Ride check to manouver your way out.`,
+                    '4': `${titledTerrain}: Powder rains down on you! Your pokemon starts shuddering - Make a DC${fourthDegreeMean} Survivalist or Herbology check to cure your pokemon of poison. Poison and Steel types are immune.`,
+                    '5': `${titledTerrain}: Make a DC${sixthDegreeMean} perception check. If you fail a column of water dislodges you from your seat and you lose your next action.`,
+                    '6': `${titledTerrain}: It's a trap! A cage falls upon you. Make a DC${firstDegreeMean} lockpicking check to escape or else lose your next turn. Pokemon with teleport are immune.`,
                   },
                   forest: {
-                    '1': 'm1',
-                    '2': 'm2',
-                    '3': 'm3',
-                    '4': 'm4',
-                    '5': 'm5',
-                    '6': 'm6',
+                    '1': `${titledTerrain}: Make a DC${thirdDegreeMean} concentration check. If you fail your ride falls asleep. Your next turn's action must be used to wake your pokemon. Roll a DC20, a 5 or less and your pokemon is still asleep and loses its movement.`,
+                    '2': `${titledTerrain}: There is a Snorlax in the way! Make a DC${fifthDegreeMean} Climbing check or gain disadvantage. Flying pokemon are immunne. Pokemon knowing Wake Up Slap (or other wake up moves) may wake up the Snorlax and make an Attack Challenge against a DC${thirdDegreeMean} Defence.`,
+                    '3': `${titledTerrain}: You hear buzzing growing louder and louder. You look up and see a wall of Beedrill covering the sky. Make a DC${fourthDegreeMean} Deceiver or Stealth check or else go back one space.`,
+                    '4': `${titledTerrain}: You smell smoke... Make a DC${sixthDegreeMean} Riding or Tracking check to avoid the imminent forest fire. If you fail take disadvantage.`,
+                    '5': `${titledTerrain}: You see something glinting to the left. Then the right. Make a DC${sixthDegreeMean} Intimidation or Focus check to scare or avoid falling asleep. If you fail you fall asleep and require a DC10 or above to wake up during your next action. If you fail that you skip that turn and wake up on your next turn. Fairy types are immune.`,
+                    '6': `${titledTerrain}: There is a fallen tree blocking the path! Grass types with vine attacks are immune. Make a DC${firstDegreeMean} of Herbology to avoid the patch of itchy thistle. If you fail gain disadvantage.`,
                   },
                   cave: {
-                    '1': 'm1',
-                    '2': 'm2',
-                    '3': 'm3',
-                    '4': 'm4',
-                    '5': 'm5',
-                    '6': 'm6',
+                    '1': `${terrain.toUpperCase()}: The cave is incredibly dark! Dark, Ghost, Dragon and Fire pokemon can see. All other type gain -5 perception their next turn.`,
+                    '2': `${terrain.toUpperCase()}: Zubat swoop down upon you! Make a DC${thirdDegreeMean} attack check to fend them off else take disadvantage`,
+                    '3': `${terrain.toUpperCase()}: You see eyes shining in the dark and a gutteral roar. Make a DC${fifthDegreeMean} check to Focus. If you fail, go back one space as your Pokemon is terrified.`,
+                    '4': `${terrain.toUpperCase()}: Your ride stumbles. Make a DC${secondDegreeMean} Agility or Riding check to stay seated. If you fail gain disadvantage next turn. Flying and Dragon are immune.`,
+                    '5': `${terrain.toUpperCase()}: Geodudes swarm! Make a DC${fourthDegreeMean} Defence check or else gain disadvantage the next turn. Rock types gain +5 to their roll.`,
+                    '6': `${terrain.toUpperCase()}: There is a rumble which permeates your spine and stones fall from the ceiling. It might be a cave-in! Make a DC${fourthDegreeMean} Survivalist or Perception check or else go back one space due to rock-fall. Ghost types are immune.`,
                   },
                 }[terrain][randomNumberUpToSix]
-              }
+              },
             }
         })
         
